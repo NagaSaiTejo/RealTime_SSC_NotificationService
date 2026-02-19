@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS events (
   channel VARCHAR(255) NOT NULL,
   event_type VARCHAR(255) NOT NULL,
   payload JSONB NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
 -- Index for replay performance
@@ -20,7 +20,7 @@ CREATE INDEX IF NOT EXISTS idx_events_channel_id ON events (channel, id);
 CREATE TABLE IF NOT EXISTS user_subscriptions (
   user_id INTEGER NOT NULL REFERENCES users(id),
   channel VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
   PRIMARY KEY (user_id, channel)
 );
 
